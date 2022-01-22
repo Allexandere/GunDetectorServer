@@ -1,0 +1,19 @@
+server:
+  port: 9091
+cloud:
+  aws:
+    region:
+      static: eu-central-1
+      auto: false
+    credentials:
+      access-key: AKIAZLSCHF3AJTVUQOHX
+      secret-key: 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
+    end-point:
+      uri: https://sqs.eu-central-1.amazonaws.com/643310235328/gun-photo-queue
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude:
+      - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
+      - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
