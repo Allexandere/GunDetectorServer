@@ -7,6 +7,7 @@ import com.comet.serverapp.repository.NewUrlRepository;
 import com.comet.serverapp.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UrlServiceImpl implements UrlService {
@@ -30,5 +31,16 @@ public class UrlServiceImpl implements UrlService {
         String url = extractUrlFromS3Event(event);
         NewUrl newUrlEntry = new NewUrl(url);
         newUrlRepository.save(newUrlEntry);
+    }
+
+    @Override
+    @Transactional
+    public String popFirstUrlInQueue() {
+        NewUrl firstInQueueUrl = newUrlRepository.findFirstByOrderByCreationDate();
+        if (firstInQueueUrl == null) {
+            return null;
+        }
+        newUrlRepository.deleteById(firstInQueueUrl.getId());
+        return firstInQueueUrl.getUrl();
     }
 }
