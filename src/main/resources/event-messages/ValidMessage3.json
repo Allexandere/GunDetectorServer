@@ -1,0 +1,38 @@
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "eu-central-1",
+      "eventTime": "2022-01-23T12:12:49.445Z",
+      "eventName": "ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "AZTZK58MZ3GII"
+      },
+      "requestParameters": {
+        "sourceIPAddress": "89.175.18.189"
+      },
+      "responseElements": {
+        "x-amz-request-id": "FVP5JFT30YXWRJRC",
+        "x-amz-id-2": "+fudP8f3C3IjUWijVJbuZ3b4XDthyOd5HE6glgrXgH6oaq8kxeWabBz8xSchD8KjTJduUdn8mu3Zgt1Cade+EqcTlDgZM7ty"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "photo is uploaded",
+        "bucket": {
+          "name": "guns1g23",
+          "ownerIdentity": {
+            "principalId": "AZTZK58MZ3GII"
+          },
+          "arn": "arn:aws:s3:::guns1g23"
+        },
+        "object": {
+          "key": "autobiography.jpeg",
+          "size": 7042,
+          "eTag": "d4dd6c8979daec0bd13a101de7a8aba3",
+          "sequencer": "0061ED46415F0A9E3A"
+        }
+      }
+    }
+  ]
+}
