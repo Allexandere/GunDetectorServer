@@ -20,14 +20,23 @@ spring:
       - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
       - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
   datasource:
-    url: jdbc:postgresql://localhost/guns
-    username: postgres
-    password: 1
+    url: jdbc:postgresql://${DB_SERVER}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    #url: jdbc:postgresql://localhost/guns
+    #username: postgres
+    #password: 1
   jpa:
-    show-sql: true
+    show-sql: false
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+model:
+  #url: http://gun-detector-model:8000/
+  #detect_endpoint: /detect
+  url: http://${MODEL_HOST}:${MODEL_PORT}
+  detect_endpoint: /${MODEL_DETECT_ENDPOINT}

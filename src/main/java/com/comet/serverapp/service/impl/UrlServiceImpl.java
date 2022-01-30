@@ -27,20 +27,26 @@ public class UrlServiceImpl implements UrlService {
     }
 
     @Override
-    public void addObjectUrlToQueue(S3EventNotification event) {
+    public NewUrl addObjectUrlToQueue(S3EventNotification event) {
         String url = extractUrlFromS3Event(event);
-        NewUrl newUrlEntry = new NewUrl(url);
-        newUrlRepository.save(newUrlEntry);
+        String key = extractKeyFromS3Event(event);
+        NewUrl newUrlEntry = new NewUrl(url, key);
+        return newUrlRepository.save(newUrlEntry);
     }
 
     @Override
     @Transactional
-    public String popFirstUrlInQueue() {
+    public NewUrl popFirstUrlInQueue() {
         NewUrl firstInQueueUrl = newUrlRepository.findFirstByOrderByCreationDate();
         if (firstInQueueUrl == null) {
             return null;
         }
         newUrlRepository.deleteById(firstInQueueUrl.getId());
-        return firstInQueueUrl.getUrl();
+        return firstInQueueUrl;
+    }
+
+    @Override
+    public String extractKeyFromS3Event(S3EventNotification event) {
+        return event.getRecords().get(0).getS3().getObject().getKey();
     }
 }

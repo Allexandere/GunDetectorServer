@@ -18,9 +18,12 @@ public class NewUrl {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date")
     private Date creationDate;
+    @Column
+    private String key;
 
-    public NewUrl(String url) {
+    public NewUrl(String url, String key) {
         this.url = url;
+        this.key = key;
         this.creationDate = new Date();
     }
 

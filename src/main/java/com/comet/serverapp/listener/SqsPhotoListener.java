@@ -16,6 +16,7 @@ public class SqsPhotoListener {
 
     @SqsListener("gun-photo-queue")
     public void receiveMessage(String message) {
+        log.info("SQS message: " + message);
         S3EventNotification event = S3EventNotification.parseJson(message);
         urlService.addObjectUrlToQueue(event);
     }
