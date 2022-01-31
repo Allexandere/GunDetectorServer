@@ -1,5 +1,6 @@
 server:
-  port: 9091
+  port: 8081
+
 cloud:
   aws:
     region:
@@ -10,6 +11,7 @@ cloud:
       secret-key: OMUilrRINoAEFd9nZiyfT6iN9ZpjcsbssybKR3lj
     end-point:
       uri: https://sqs.eu-central-1.amazonaws.com/643310235328/gun-photo-queue
+
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -17,3 +19,24 @@ spring:
     exclude:
       - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
       - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
+  datasource:
+    url: jdbc:postgresql://${DB_SERVER}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    #url: jdbc:postgresql://localhost/guns
+    #username: postgres
+    #password: 1
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+model:
+  #url: http://gun-detector-model:8000/
+  #detect_endpoint: /detect
+  url: http://${MODEL_HOST}:${MODEL_PORT}
+  detect_endpoint: /${MODEL_DETECT_ENDPOINT}

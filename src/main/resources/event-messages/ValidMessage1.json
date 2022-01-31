@@ -1,0 +1,38 @@
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "eu-central-1",
+      "eventTime": "2022-01-23T11:34:27.164Z",
+      "eventName": "ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "AZTZK58MZ3GII"
+      },
+      "requestParameters": {
+        "sourceIPAddress": "89.175.18.189"
+      },
+      "responseElements": {
+        "x-amz-request-id": "03DY155RQTP154ES",
+        "x-amz-id-2": "NcJ0gXUtDmCsQnb0qHoe4fhS2zcY8WB+RtYQ3YHFt/tx+yw6Akypk5IgUMrHONRprSeHYSH6yM4qHWC5S2bbSVO9QMj6Pr/k"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "photo is uploaded",
+        "bucket": {
+          "name": "guns1g23",
+          "ownerIdentity": {
+            "principalId": "AZTZK58MZ3GII"
+          },
+          "arn": "arn:aws:s3:::guns1g23"
+        },
+        "object": {
+          "key": "me.jpg",
+          "size": 46370,
+          "eTag": "48f592ba96552770f01f6c1ce7729757",
+          "sequencer": "0061ED3D4323496686"
+        }
+      }
+    }
+  ]
+}

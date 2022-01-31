@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  db:
+    image: "postgres:alpine"
+    container_name: db
+    volumes:
+      - guns-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: guns
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  gun-detector-model:
+    image: gun-model
+    container_name: gun-detector-model
+    ports:
+      - 8000:8000
+
+  gun-detector-server:
+    build: .
+    container_name: gun-detector-server
+
+    environment:
+      DB_SERVER: db
+      POSTGRES_DB: guns
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      MODEL_HOST: gun-detector-model
+      MODEL_PORT: 8000
+      MODEL_DETECT_ENDPOINT: detect
+    ports:
+      - 8081:8081
+    links:
+      - db
+      - gun-detector-model
+    depends_on:
+      - db
+      - gun-detector-model
+
+volumes:
+  guns-data:
