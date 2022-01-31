@@ -1,4 +1,4 @@
-package com.comet.serverapp;
+package com.comet.serverapp.tests;
 
 import com.comet.serverapp.adapters.ModelAdapter;
 import com.comet.serverapp.dto.PhotoUrlDto;

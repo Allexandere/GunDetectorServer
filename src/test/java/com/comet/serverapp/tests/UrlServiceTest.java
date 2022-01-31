@@ -1,6 +1,7 @@
-package com.comet.serverapp;
+package com.comet.serverapp.tests;
 
 import com.amazonaws.services.s3.event.S3EventNotification;
+import com.comet.serverapp.Utils;
 import com.comet.serverapp.service.UrlService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
