@@ -23,8 +23,6 @@ public class QueuePoller {
     @Autowired
     private ModelAdapter modelAdapter;
     @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
     private UrlService urlService;
     @Autowired
     private ProcessedUrlService processedUrlService;
@@ -35,11 +33,19 @@ public class QueuePoller {
         if(photoUrl == null){
             return;
         }
-        String jsonResult = modelAdapter.processPhotoByUrl(new PhotoUrlDto(photoUrl.getUrl()));
-        jsonResult = jsonResult.replace("\"", "").replace("'", "\"");
-        UUID key = UUID.fromString(photoUrl.getKey().replace(".jpg", ""));
+        String response = modelAdapter.processPhotoByUrl(new PhotoUrlDto(photoUrl.getUrl()));
+        String jsonResult = extractJson(response);
+        UUID key = extractKey(photoUrl);
         log.info(String.format("QueuePoller pop: key: %s jsonResult: %s", key, jsonResult));
         processedUrlService.saveProcessedUrl(key, jsonResult);
+    }
+
+    private String extractJson(String response){
+        return response.replace("\"", "").replace("'", "\"");
+    }
+
+    private UUID extractKey(NewUrl photoUrl){
+        return UUID.fromString(photoUrl.getKey().replace(".jpg", ""));
     }
 
 }
