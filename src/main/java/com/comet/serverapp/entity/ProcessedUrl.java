@@ -12,7 +12,7 @@ import java.util.UUID;
 public class ProcessedUrl {
     @Id
     private UUID key;
-    @Column(name = "json_result")
+    @Column(name = "json_result", length = 1048576)
     private String jsonResult;
 
     public ProcessedUrl(UUID key, String jsonResult) {
